@@ -1,0 +1,51 @@
+# this script automates using gnuplot to create an image of some data
+# Nathan Moore 2026-09-13
+
+# sending output to png file
+set terminal pngcairo size 800,600 enhanced font 'Arial,12'
+set output "09-14-plot.png"
+
+# reading data in from csv file
+set datafile separator ","   # Tell gnuplot CSV uses commas
+
+# fit a straight line to the data.  Fitting to the linear x, ln-y axes
+# which maps to a decaying exponential function
+f(x) = m*x + b
+fit f(x) "09-14_Nathans_bubble_rate_over_days.csv" using ($1):(log(1/$2)) via m,b
+
+# plot formatting
+set xlabel 'day of September (day)'
+set ylabel 'ln(bubble frequency) ln (1/frame)'
+set grid
+
+# run a plot command of data and fit function
+plot "09-14_Nathans_bubble_rate_over_days.csv" using ($1):(log(1/$2)), f(x)
+
+
+# here's what the output looks like:
+#>>> gnuplot 09-14_run_fit.txt
+#iter      chisq       delta/lim  lambda   m             b
+#   0 3.5202509201e+03   0.00e+00  6.65e+00    1.000000e+00   1.000000e+00
+#   1 6.0424279325e+00  -5.82e+07  6.65e-01   -5.183695e-01   8.225527e-01
+#   2 2.0365292838e+00  -1.97e+05  6.65e-02   -4.962241e-01   1.486177e-01
+#   3 1.9287210736e+00  -5.59e+03  6.65e-03   -4.589268e-01  -2.096659e-01
+#   4 1.9287179813e+00  -1.60e-01  6.65e-04   -4.587260e-01  -2.115950e-01
+#iter      chisq       delta/lim  lambda   m             b
+#
+#After 4 iterations the fit converged.
+#final sum of squares of residuals : 1.92872
+#rel. change during last iteration : -1.60329e-06
+#
+#degrees of freedom    (FIT_NDF)                        : 14
+#rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.371168
+#variance of residuals (reduced chisquare) = WSSR/ndf   : 0.137766
+#
+#Final set of parameters            Asymptotic Standard Error
+#=======================            ==========================
+#m               = -0.458726        +/- 0.04353      (9.488%)
+#b               = -0.211595        +/- 0.4072       (192.4%)
+#
+#correlation matrix of the fit parameters:
+#                m      b
+#m               1.000
+#b              -0.974  1.000
