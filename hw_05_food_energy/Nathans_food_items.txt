@@ -1,0 +1,13 @@
+# Nathan Moore's food energy items
+# 09-14
+# Walmart and Target
+# food item, food group, total cost($), and total Food Energy (kcals),
+King Oscar Kippers, Meat,  2.63, 140,
+Polar Kippers, Meat, 2.23, 130,
+Bumble Bee Salmon, Meat, 3.68, 150,
+Fishwife Sardines with Lemon, Meat, 6.99, 200,
+Wild Planet Sardines, Meat, 2.97, 170,
+Jif Creamy 16oz, Nuts & Fats, 2.98, 2660,
+Turkey SPAM, Meat, 3.72, 480,
+Korean BBQ SPAM, Meat, 3.72, 1080,
+
